@@ -391,7 +391,7 @@ sub _delete_ca($$)
   (my $ca_name, my $logger) = @_;
   my $rc = undef;
 
-  unless (defined $ca_name and $ca_name =~ /^[-_\w]+$/) {
+  unless (defined $ca_name and $ca_name =~ /^\w([\s-_\w]+\.?)+\w$/) {
     $logger->error('invalid argument ca_name: `'.$ca_name.q(').q(:));
     return;
   }
