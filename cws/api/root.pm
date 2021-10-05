@@ -27,6 +27,11 @@ sub create($) {
   }
 
   my $ca_name = $q->{param}('name');
+  unless ($ca_name =~ /^\w([\s-_\w]+\.?)+\w$/) {
+    $logger->warning('Invalid arguments for create ca: '.$ca_name);
+    return ([400, [], []]);
+  }
+  
   my $with_x509_extensions = $q->{param}('with_x509_extensions');
 
   $openssl_conf = cws::util::override_with_arguments($openssl_conf
